@@ -151,18 +151,28 @@ class RbViewport extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      rb_item: cube
+      rb_item: cube,
+      // rb_item: this.props.data
     }
   }
 
+  componentWillMount() {
+    console.log(this.state.rb_item)
+    this.setState({
+      rb_item: this.state.rb_item
+    })
+    // console.log(this.state.data);
+  }
+
   render() {
-    const { rb_item } = this.state;
+    // const { rb_item } = this.state;
+    // console.log(this.props);
     return (
       <div>
         <b>Viewport</b>
           <Row>
             <Col span={24} style={{ paddingTop:"20px", paddingRight:"20px", paddingBottom:"5px" }}>
-              <Viewport width={750} height={500} rb_item={rb_item}/>
+              <Viewport width={750} height={500} rb_item={this.state.rb_item}/>
             </Col>
           </Row>
       </div>

@@ -10,19 +10,21 @@ class RbitemDetail extends React.Component {
 
   state = {
     rbitem: {},
-    json: {}
+    json: {},
+    displayGeom: {}
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const rbitemID = this.props.match.params.rbitemID;
-    console.log(rbitemID)
+    // console.log(rbitemID)
     axios.get(`http://127.0.0.1:8000/api/${rbitemID}`)
       .then(res => {
         this.setState({
           rbitem: res.data,
-          json: JSON.parse(res.data.archiJson)
+          json: JSON.parse(res.data.archiJson),
+          displayGeom: JSON.parse(res.data.displayGeom)
         });
-        console.log(res.data);
+        // console.log(res.data.displayGeom);
       })
   }
 
@@ -30,17 +32,14 @@ class RbitemDetail extends React.Component {
     const ID = this.props.match.params.rbitemID;
     const name = this.state.rbitem.name;
     const description = this.state.rbitem.description;
-
-    console.log(name)
-    // const new_data = e.updated_src;
-    console.log(JSON.stringify(e.updated_src))
-    // console.log(ID)
+    const displayGeom = this.state.rbitem.displayGeom;
 
     const data = {
       id: ID,
       name: name,
       description: description,
-      archiJson: JSON.stringify(e.updated_src)
+      archiJson: JSON.stringify(e.updated_src),
+      displayGeom: displayGeom
     }
 
     function updateRbitem(data) {
@@ -51,30 +50,10 @@ class RbitemDetail extends React.Component {
     }
 
     updateRbitem(data);
-
-    // axios.put(`http://127.0.0.1:8000/api/${Number(ID)}/`, {
-    //   archiJson: JSON.stringify(e.updated_src)
-    // })
-    // .then(res => console.log(res))
-    // .catch(error => console.error(error))
-
-    // switch ( requestType ) {
-    //   case 'post':
-    //     axios.post('http://127.0.0.1:8000/api/', {
-    //       archiJson: archiJson
-    //     })
-    //     .then(res => console.log(res))
-    //     .catch(err => console.err(err))
-    //   case 'put':
-    //     axios.post(`http://127.0.0.1:8000/api/${rbitemID}/`, {
-    //       archiJson: archiJson
-    //     })
-    //     .then(res => console.log(res))
-    //     .catch(err => console.err(err))
-    // }
   }
 
   render() {
+    console.log(this.state.rbitem)
     return (
       <Card title={this.state.rbitem.name}>
         <Row>
