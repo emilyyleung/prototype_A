@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Card, Row, Col } from 'antd';
 
 import ReactJson from 'react-json-view';
-import Viewport from '../components/Viewport';
+import RbViewport from '../components/RbViewport';
 
 class RbitemDetail extends React.Component {
 
@@ -83,10 +83,10 @@ class RbitemDetail extends React.Component {
           </Col>
         </Row>
         <Row>
-          <Col span={12}>
-            <Viewport />
+          <Col span={18}>
+            <RbViewport data={this.state.rbitem.displayGeom}/>
           </Col>
-          <Col span={12}>
+          <Col span={6}>
             <p><b>JSON Tree</b></p>
             <ReactJson
               name={this.state.rbitem.name}
