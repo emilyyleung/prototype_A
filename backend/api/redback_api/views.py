@@ -6,3 +6,8 @@
 # class Rb_itemView(viewsets.ModelViewSet):
 #     queryset = Rb_item.objects.all()
 #     serializer_class = Rb_itemSerializer
+from django.shortcuts import render
+
+# Create your views here.
+def index(request):
+    return render(request, 'redback_api/index.html')
